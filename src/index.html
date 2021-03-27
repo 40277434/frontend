@@ -103,12 +103,7 @@ let operation = '';
 
 //let addURL = "http://add.webcalc.qpc.hal.davecutting.uk";
 //let minusURL = "http://subtract.webcalc.qpc.hal.davecutting.uk";
-let addURL = "http://vip.adac.vip/add";
-let minusURL = "http://vip.adac.vip/minus";
-let productURL = "http://vip.adac.vip/product";
-let diviURL = "http://vip.adac.vip/divi";
-let powerURL = "http://vip.adac.vip/power";
-let moduluURL = "http://vip.adac.vip/modulu";
+let url = "http://proxy.40277434.qpc.hal.davecutting.uk"
 
 function Display()
 {
@@ -243,8 +238,8 @@ function Equals()
             	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
             }
         };
-
-        xhttp.open("GET",addURL+"?x="+x+"&y="+y);
+        let method="add"
+        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
         xhttp.send();
 
         return;
@@ -269,8 +264,9 @@ function Equals()
             	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
             }
         };
+        let method="minus";
+        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
 
-        xhttp.open("GET",minusURL+"?x="+x+"&y="+y);
         xhttp.send();
 
         return;
@@ -296,7 +292,8 @@ function Equals()
             }
         };
 
-        xhttp.open("GET",productURL+"?x="+x+"&y="+y);
+        let method="multiply";
+        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
         xhttp.send();
 
         return;
@@ -322,7 +319,9 @@ function Equals()
             }
         };
 
-        xhttp.open("GET",diviURL+"?x="+x+"&y="+y);
+        let method="division";
+        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
+
         xhttp.send();
 
         return;
@@ -348,7 +347,9 @@ function Equals()
             }
         };
 
-        xhttp.open("GET",powerURL+"?x="+x+"&y="+y);
+        let method="power";
+        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
+
         xhttp.send();
 
         return;
@@ -373,8 +374,9 @@ function Equals()
             	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
             }
         };
+        let method="modulo";
+        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
 
-        xhttp.open("GET",moduluURL+"?x="+x+"&y="+y);
         xhttp.send();
 
         return;
