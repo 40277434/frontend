@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: 40277434/webcalc-frontend
+    container_name: webcalc-frontend-container
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
