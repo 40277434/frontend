@@ -1,90 +1,91 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>WebCalc</title>
-<style type="text/css">
-body  {
-    font-size: 150%;
-    font-family: monospace;
-}
+    <title>WebCalc</title>
+    <style type="text/css">
+        body {
+            font-size: 150%;
+            font-family: monospace;
+        }
 
-#logo
-{
-    font-family: Calibri, sans-serif;
-    font-weight: lighter;
-    color: #505050;
-    margin: 0.5em;
-}
+        #logo {
+            font-family: Calibri, sans-serif;
+            font-weight: lighter;
+            color: #505050;
+            margin: 0.5em;
+        }
 
-#calculator
-{
-    text-align: center;
-    margin-top: 1em;
-}
+        #calculator {
+            text-align: center;
+            margin-top: 1em;
+        }
 
-#display {
-    font-size: 100%;
-    padding: 0.2em;
-    margin: 0.2em;
-    font-family: monospace;
-    letter-spacing: 0.1em;
-}
+        #display {
+            font-size: 100%;
+            padding: 0.2em;
+            margin: 0.2em;
+            font-family: monospace;
+            letter-spacing: 0.1em;
+        }
 
-.calc1 {
-    border: solid #d0d0d0 1px;
-    background-color: #f0f0f0;
-    padding: 1.5em;
-    margin: 1em;
-}
-.power{
-	font-size: 10px;
-    padding: 20px 16px;
-}
-</style>
+        .calc1 {
+            border: solid #d0d0d0 1px;
+            background-color: #f0f0f0;
+            padding: 1.5em;
+            margin: 1em;
+        }
+
+        .power {
+            font-size: 10px;
+            padding: 20px 16px;
+        }
+    </style>
 
 </head>
+
 <body>
-<div id="calculator">
-    <div id="logo">
-        Casidave Calcutron
+    <div id="calculator">
+        <div id="logo">
+            Casidave Calcutron
+        </div>
+        <div>
+            <input type="text" id="display" readonly="1" value="">
+            <a href="/list">list</a>
+        </div>
+        <div>
+            <button class="calc1" onclick="Clear();">C</button>
+            <button class="calc1 power" onclick="Powers()">x^y</button>
+            <button class="calc1" onclick="Divis()">/</button>
+            <button class="calc1" onclick="Products()">x</button>
+        </div>
+        <div>
+            <button class="calc1" onclick="NumClick(7);">7</button>
+            <button class="calc1" onclick="NumClick(8);">8</button>
+            <button class="calc1" onclick="NumClick(9);">9</button>
+            <button class="calc1" onclick="Plus();">+</button>
+        </div>
+        <div>
+            <button class="calc1" onclick="NumClick(4);">4</button>
+            <button class="calc1" onclick="NumClick(5);">5</button>
+            <button class="calc1" onclick="NumClick(6);">6</button>
+            <button class="calc1" onclick="Minus();">-</button>
+        </div>
+        <div>
+            <button class="calc1" onclick="NumClick(1);">1</button>
+            <button class="calc1" onclick="NumClick(2);">2</button>
+            <button class="calc1" onclick="NumClick(3);">3</button>
+            <button class="calc1" onclick="Equals();">=</button>
+        </div>
+        <div>
+            <button class="calc1" onclick="NumClick(0);">0</button>
+            <button class="calc1" onclick="Modulus()">%</button>
+            <button class="calc1" onclick="">?</button>
+            <button class="calc1" onclick="">?</button>
+        </div>
+        <div id="mgs" style="color: red;"></div>
+        <div id="res"></div>
     </div>
-    <div>
-        <input type="text" id="display" readonly="1" value="">
-        <a href="/list">list</a>
-    </div>
-    <div>
-        <button class="calc1" onclick="Clear();">C</button>
-        <button class="calc1 power" onclick="Powers()">x^y</button>
-        <button class="calc1" onclick="Divis()">/</button>
-        <button class="calc1" onclick="Products()">x</button>
-    </div>
-    <div>
-        <button class="calc1" onclick="NumClick(7);">7</button>
-        <button class="calc1" onclick="NumClick(8);">8</button>
-        <button class="calc1" onclick="NumClick(9);">9</button>
-        <button class="calc1" onclick="Plus();">+</button>
-    </div>
-    <div>
-        <button class="calc1" onclick="NumClick(4);">4</button>
-        <button class="calc1" onclick="NumClick(5);">5</button>
-        <button class="calc1" onclick="NumClick(6);">6</button>
-        <button class="calc1" onclick="Minus();">-</button>
-    </div>
-    <div>
-        <button class="calc1" onclick="NumClick(1);">1</button>
-        <button class="calc1" onclick="NumClick(2);">2</button>
-        <button class="calc1" onclick="NumClick(3);">3</button>
-        <button class="calc1" onclick="Equals();">=</button>
-    </div>
-    <div>
-        <button class="calc1" onclick="NumClick(0);">0</button>
-        <button class="calc1" onclick="Modulus()">%</button>
-        <button class="calc1" onclick="">?</button>
-        <button class="calc1" onclick="">?</button>
-    </div>
-    <div id="mgs" style="color: red;"></div>
-    <div id="res"></div>
-</div>
 </body>
 
 <!-- 
@@ -96,292 +97,277 @@ body  {
 <script src="/webjars/jquery/3.6.0/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-let value = 0;
-let x = 0;
-let y = 0;
-let operation = '';
+    let value = 0;
+    let x = 0;
+    let y = 0;
+    let operation = '';
 
-//let addURL = "http://add.webcalc.qpc.hal.davecutting.uk";
-//let minusURL = "http://subtract.webcalc.qpc.hal.davecutting.uk";
-let url = "http://proxy.40277434.qpc.hal.davecutting.uk"
+    //let addURL = "http://add.webcalc.qpc.hal.davecutting.uk";
+    //let minusURL = "http://subtract.webcalc.qpc.hal.davecutting.uk";
+    let url = "http://proxy.40277434.qpc.hal.davecutting.uk"
 
-function Display()
-{
-    document.getElementById('display').value = value;
-    $("#mgs").empty();
-}
-
-function Clear()
-{
-    value = 0;
-    x = 0;
-    y = 0;
-    operation = '';
-    Display();
-}
-
-function NumClick(n)
-{
-    if (value == 0)
-        value = n;
-    else
-    {
-        value *= 10;
-        value += n;
+    function Display() {
+        document.getElementById('display').value = value;
+        $("#mgs").empty();
     }
 
-    Display();
-}
-
-function Plus()
-{
-    // if we have an outstanding operation resolve it
-    if (operation != '')
-        Equals();
-
-    x = value;
-    value = 0;
-    operation = '+';
-
-    Display();
-}
-
-function Minus()
-{
-    // if we have an outstanding operation resolve it
-    if (operation != '')
-        Equals();
-
-    x = value;
-    value = 0;
-    operation = '-';
-
-    Display();
-}
-
-function Products()
-{
-    // if we have an outstanding operation resolve it
-    if (operation != '')
-        Equals();
-
-    x = value;
-    value = 0;
-    operation = 'x';
-
-    Display();
-}
-
-function Divis()
-{
-    // if we have an outstanding operation resolve it
-    if (operation != '')
-        Equals();
-
-    x = value;
-    value = 0;
-    operation = '/';
-
-    Display();
-}
-
-function Powers(){
-	
-	if (operation != '')
-        Equals();
-
-    x = value;
-    value = 0;
-    operation = '^';
-
-    Display();
-}
-
-function Modulus(){
-	
-	if (operation != '')
-        Equals();
-
-    x = value;
-    value = 0;
-    operation = '%';
-
-    Display();
-}
-
-function Equals()
-{
-    if (operation == '')
-        return;
-
-    y = value;
-
-    
-    if (operation == '+')
-    {
-    	//let ans = x+y; // nah - too easy :)
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	var j = JSON.parse(this.response);
-            	if(j.error){
-            		$("#mgs").html(j.reason);
-            	}else{
-            	    x=0;
-                    y=0;
-                    operation='';
-                    value = j.answer;
-                    $("#res").html(this.response);
-                    Display();
-            	}
-            }else{
-            	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
-            }
-        };
-        let method="add"
-        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
-        xhttp.send();
-
-        return;
+    function Clear() {
+        value = 0;
+        x = 0;
+        y = 0;
+        operation = '';
+        Display();
     }
-    else if (operation == '-')
-    {
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	var j = JSON.parse(this.response);
-            	if(j.error){
-            		$("#mgs").html(j.reason);
-            	}else{
-            	    x=0;
-                    y=0;
-                    operation='';
-                    value = j.answer;
-                    $("#res").html(this.response);
-                    Display();
-            	}
-            }else{
-            	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
-            }
-        };
-        let method="minus";
-        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
 
-        xhttp.send();
+    function NumClick(n) {
+        if (value == 0)
+            value = n;
+        else {
+            value *= 10;
+            value += n;
+        }
 
-        return;
+        Display();
     }
-    else if (operation == 'x')
-    {
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	var j = JSON.parse(this.response);
-            	if(j.error){
-            		$("#mgs").html(j.reason);
-            	}else{
-            	    x=0;
-                    y=0;
-                    operation='';
-                    value = j.answer;
-                    $("#res").html(this.response);
-                    Display();
-            	}
-            }else{
-            	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
-            }
-        };
 
-        let method="multiply";
-        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
-        xhttp.send();
+    function Plus() {
+        // if we have an outstanding operation resolve it
+        if (operation != '')
+            Equals();
 
-        return;
+        x = value;
+        value = 0;
+        operation = '+';
+
+        Display();
     }
-    else if (operation == '/')
-    {
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	var j = JSON.parse(this.response);
-            	if(j.error){
-            		$("#mgs").html(j.reason);
-            	}else{
-            	    x=0;
-                    y=0;
-                    operation='';
-                    value = j.answer;
-                    $("#res").html(this.response);
-                    Display();
-            	}
-            }else{
-            	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
-            }
-        };
 
-        let method="division";
-        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
+    function Minus() {
+        // if we have an outstanding operation resolve it
+        if (operation != '')
+            Equals();
 
-        xhttp.send();
+        x = value;
+        value = 0;
+        operation = '-';
 
-        return;
+        Display();
     }
-    else if (operation == '^')
-    {
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	var j = JSON.parse(this.response);
-            	if(j.error){
-            		$("#mgs").html(j.reason);
-            	}else{
-            	    x=0;
-                    y=0;
-                    operation='';
-                    value = j.answer;
-                    $("#res").html(this.response);
-                    Display();
-            	}
-            }else{
-            	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
-            }
-        };
 
-        let method="power";
-        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
+    function Products() {
+        // if we have an outstanding operation resolve it
+        if (operation != '')
+            Equals();
 
-        xhttp.send();
+        x = value;
+        value = 0;
+        operation = 'x';
 
-        return;
+        Display();
     }
-    else if (operation == '%')
-    {
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	var j = JSON.parse(this.response);
-            	if(j.error){
-            		$("#mgs").html(j.reason);
-            	}else{
-            	    x=0;
-                    y=0;
-                    operation='';
-                    value = j.answer;
-                    $("#res").html(this.response);
-                    Display();
-            	}
-            }else{
-            	$("#mgs").html("ERR_INTERNET_DISCONNECTED");
-            }
-        };
-        let method="modulo";
-        xhttp.open("GET",url+"?x="+x+"&y="+y+"&method="+method);
 
-        xhttp.send();
+    function Divis() {
+        // if we have an outstanding operation resolve it
+        if (operation != '')
+            Equals();
 
-        return;
+        x = value;
+        value = 0;
+        operation = '/';
+
+        Display();
     }
-}
+
+    function Powers() {
+
+        if (operation != '')
+            Equals();
+
+        x = value;
+        value = 0;
+        operation = '^';
+
+        Display();
+    }
+
+    function Modulus() {
+
+        if (operation != '')
+            Equals();
+
+        x = value;
+        value = 0;
+        operation = '%';
+
+        Display();
+    }
+
+    function Equals() {
+        if (operation == '')
+            return;
+
+        y = value;
+
+
+        if (operation == '+') {
+            //let ans = x+y; // nah - too easy :)
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var j = JSON.parse(this.response);
+                    if (j.error) {
+                        $("#mgs").html(j.reason);
+                    } else {
+                        x = 0;
+                        y = 0;
+                        operation = '';
+                        value = j.answer;
+                        $("#res").html(this.response);
+                        Display();
+                    }
+                } else {
+                    $("#mgs").html("ERR_INTERNET_DISCONNECTED");
+                }
+            };
+            let method = "add"
+            xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+            xhttp.send();
+
+            return;
+        }
+        else if (operation == '-') {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var j = JSON.parse(this.response);
+                    if (j.error) {
+                        $("#mgs").html(j.reason);
+                    } else {
+                        x = 0;
+                        y = 0;
+                        operation = '';
+                        value = j.answer;
+                        $("#res").html(this.response);
+                        Display();
+                    }
+                } else {
+                    $("#mgs").html("ERR_INTERNET_DISCONNECTED");
+                }
+            };
+            let method = "minus";
+            xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+
+            xhttp.send();
+
+            return;
+        }
+        else if (operation == 'x') {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var j = JSON.parse(this.response);
+                    if (j.error) {
+                        $("#mgs").html(j.reason);
+                    } else {
+                        x = 0;
+                        y = 0;
+                        operation = '';
+                        value = j.answer;
+                        $("#res").html(this.response);
+                        Display();
+                    }
+                } else {
+                    $("#mgs").html("ERR_INTERNET_DISCONNECTED");
+                }
+            };
+
+            let method = "multiply";
+            xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+            xhttp.send();
+
+            return;
+        }
+        else if (operation == '/') {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var j = JSON.parse(this.response);
+                    if (j.error) {
+                        $("#mgs").html(j.reason);
+                    } else {
+                        x = 0;
+                        y = 0;
+                        operation = '';
+                        value = j.answer;
+                        $("#res").html(this.response);
+                        Display();
+                    }
+                } else {
+                    $("#mgs").html("ERR_INTERNET_DISCONNECTED");
+                }
+            };
+
+            let method = "division";
+            xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+
+            xhttp.send();
+
+            return;
+        }
+        else if (operation == '^') {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var j = JSON.parse(this.response);
+                    if (j.error) {
+                        $("#mgs").html(j.reason);
+                    } else {
+                        x = 0;
+                        y = 0;
+                        operation = '';
+                        value = j.answer;
+                        $("#res").html(this.response);
+                        Display();
+                    }
+                } else {
+                    $("#mgs").html("ERR_INTERNET_DISCONNECTED");
+                }
+            };
+
+            let method = "power";
+            xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+
+            xhttp.send();
+
+            return;
+        }
+        else if (operation == '%') {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var j = JSON.parse(this.response);
+                    if (j.error) {
+                        $("#mgs").html(j.reason);
+                    } else {
+                        x = 0;
+                        y = 0;
+                        operation = '';
+                        value = j.answer;
+                        $("#res").html(this.response);
+                        Display();
+                    }
+                } else {
+                    $("#mgs").html("ERR_INTERNET_DISCONNECTED");
+                }
+            };
+            let method = "modulo";
+            xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+
+            xhttp.send();
+
+            return;
+        }
+    }
 </script>
 
 </html>
