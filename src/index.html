@@ -103,7 +103,11 @@
     let operation = '';
 
 
-    let url = "http://proxy.40277434.qpc.hal.davecutting.uk"
+    let urls = ["http://proxy.40277434.qpc.hal.davecutting.uk",
+        "http://proxy2.40277434.qpc.hal.davecutting.uk"
+    ];
+
+    let url = urls[Math.floor(Math.random() * urls.length)];
 
     function Display() {
         document.getElementById('display').value = value;
@@ -231,6 +235,7 @@
             };
             let method = "add"
             xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+            url = urls[Math.floor(Math.random() * urls.length)];
             xhttp.send();
 
             return;
@@ -256,7 +261,7 @@
             };
             let method = "subtract";
             xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
-
+            url = urls[Math.floor(Math.random() * urls.length)];
             xhttp.send();
 
             return;
@@ -283,6 +288,7 @@
 
             let method = "multiply";
             xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
+            url = urls[Math.floor(Math.random() * urls.length)];
             xhttp.send();
 
             return;
@@ -309,7 +315,7 @@
 
             let method = "division";
             xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
-
+            url = urls[Math.floor(Math.random() * urls.length)];
             xhttp.send();
 
             return;
@@ -336,7 +342,7 @@
 
             let method = "power";
             xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
-
+            url = urls[Math.floor(Math.random() * urls.length)];
             xhttp.send();
 
             return;
@@ -362,7 +368,7 @@
             };
             let method = "modulo";
             xhttp.open("GET", url + "?x=" + x + "&y=" + y + "&method=" + method);
-
+            url = urls[Math.floor(Math.random() * urls.length)];
             xhttp.send();
 
             return;
